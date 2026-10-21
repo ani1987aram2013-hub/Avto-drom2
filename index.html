@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080817">
+  <title>Neon Racing</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div class="logo">NEON <span>RACING</span></div>
+      <div class="wallet">🪙 <b id="coins">0</b></div>
+    </header>
+
+    <!-- 1. Լեզվի ընտրություն -->
+    <section id="language-screen" class="screen">
+      <div class="hero">
+        <div class="eyebrow">ARCADE • SPEED • NEON</div>
+        <h1>NEON<br><span>RACING</span></h1>
+        <p id="language-subtitle">Ընտրիր խաղի լեզուն</p>
+      </div>
+
+      <div class="language-list">
+        <button class="language-btn" data-lang="hy">🇦🇲 Հայերեն</button>
+        <button class="language-btn" data-lang="en">🇬🇧 English</button>
+        <button class="language-btn" data-lang="ru">🇷🇺 Русский</button>
+      </div>
+    </section>
+
+    <!-- 2. Անուն և ազգանուն -->
+    <section id="profile-screen" class="screen hidden">
+      <div class="panel">
+        <div class="step">STEP 02 / 04</div>
+        <h2 data-i18n="profileTitle">Ստեղծիր քո պրոֆիլը</h2>
+        <p data-i18n="profileDescription">Մուտքագրիր անունդ և ազգանունդ։</p>
+
+        <form id="profile-form">
+          <label for="first-name" data-i18n="firstName">Անուն</label>
+          <input id="first-name" maxlength="30" required autocomplete="given-name"
+                 data-i18n-placeholder="firstNamePlaceholder"
+                 placeholder="Քո անունը">
+
+          <label for="last-name" data-i18n="lastName">Ազգանուն</label>
+          <input id="last-name" maxlength="30" required autocomplete="family-name"
+                 data-i18n-placeholder="lastNamePlaceholder"
+                 placeholder="Քո ազգանունը">
+
+          <button class="primary-btn" type="submit" data-i18n="continue">Շարունակել →</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 3. Սարքի ընտրություն -->
+    <section id="device-screen" class="screen hidden">
+      <div class="panel">
+        <div class="step">STEP 03 / 04</div>
+        <h2 data-i18n="deviceTitle">Ինչո՞վ ես խաղալու</h2>
+        <p data-i18n="deviceDescription">Ընտրիր քո սարքը։</p>
+
+        <div class="device-grid">
+          <button class="device-card" data-device="pc">
+            <span class="device-icon">🖥️</span>
+            <strong data-i18n="computer">Համակարգիչ</strong>
+            <small data-i18n="computerControls">Ստեղնաշար՝ ← → կամ A / D</small>
+          </button>
+
+          <button class="device-card" data-device="phone">
+            <span class="device-icon">📱</span>
+            <strong data-i18n="phone">Հեռախոս</strong>
+            <small data-i18n="phoneControls">Հպման կոճակներ</small>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Հիմնական խաղ -->
+    <section id="game-screen" class="screen hidden">
+      <div class="game-heading">
+        <div>
+          <div class="step" data-i18n="playerLabel">ԽԱՂԱՑՈՂ</div>
+          <h2 id="player-name">Player</h2>
+        </div>
+        <div class="best-score">
+          <small data-i18n="bestScore">Լավագույն արդյունք</small>
+          <b id="best">0</b>
+        </div>
+      </div>
+
+      <div class="stats">
+        <div><small data-i18n="score">Միավորներ</small><b id="score">0</b></div>
+        <div><small data-i18n="speed">Արագություն</small><b id="speed">1.0x</b></div>
+        <div><small data-i18n="record">Ռեկորդ</small><b id="record">0</b></div>
+      </div>
+
+      <div class="canvas-wrap">
+        <canvas id="game" width="480" height="720"
+                aria-label="Neon Racing game"></canvas>
+
+        <div id="game-overlay" class="game-overlay">
+          <h2 id="game-overlay-title">NEON RACING</h2>
+          <p id="game-overlay-text">Պատրա՞ստ ես մրցավազքին։</p>
+          <button id="start-game-btn" class="primary-btn" data-i18n="startGame">
+            Սկսել խաղը
+          </button>
+        </div>
+      </div>
+
+      <div id="touch-controls" class="controls hidden">
+        <button id="left-btn" class="control-btn">⬅</button>
+        <button id="nitro-btn" class="control-btn nitro">⚡</button>
+        <button id="right-btn" class="control-btn">➡</button>
+      </div>
+
+      <div id="keyboard-help" class="keyboard-help"
+           data-i18n="keyboardHelp">
+        Կառավարում՝ ← → կամ A / D • Նիտրո՝ Space
+      </div>
+
+      <div class="action-grid">
+        <button id="shop-btn" class="secondary-btn">🛠️ <span data-i18n="shop">Upgrade խանութ</span></button>
+        <button id="profile-btn" class="secondary-btn">👤 <span data-i18n="profile">Պրոֆիլ</span></button>
+      </div>
+    </section>
+
+    <!-- Upgrade խանութ -->
+    <section id="shop-screen" class="screen hidden">
+      <div class="shop-heading">
+        <div>
+          <div class="step">GARAGE / UPGRADES</div>
+          <h2 data-i18n="shopTitle">Upgrade խանութ</h2>
+          <p data-i18n="shopDescription">Կատարելագործիր մեքենադ։</p>
+        </div>
+        <div class="shop-wallet">🪙 <b id="shop-coins">0</b></div>
+      </div>
+
+      <div id="upgrade-list" class="upgrade-list"></div>
+
+      <button id="back-to-game" class="primary-btn">
+        ← <span data-i18n="backToGame">Վերադառնալ խաղին</span>
+      </button>
+    </section>
+
+    <!-- Պրոֆիլի պատուհան -->
+    <section id="profile-details-screen" class="screen hidden">
+      <div class="panel">
+        <div class="step">PLAYER PROFILE</div>
+        <h2 data-i18n="profile">Պրոֆիլ</h2>
+        <div class="profile-avatar">🏎️</div>
+        <h3 id="profile-full-name">Player</h3>
+        <p id="profile-device">🖥️</p>
+        <p><span data-i18n="totalCoins">Ընդհանուր մետաղադրամներ</span>: <b id="profile-coins">0</b></p>
+        <p><span data-i18n="bestScore">Լավագույն արդյունք</span>: <b id="profile-best">0</b></p>
+        <button id="back-from-profile" class="primary-btn" data-i18n="backToGame">
+          Վերադառնալ խաղին
+        </button>
+      </div>
+    </section>
+
+    <footer>NEON RACING <span>•</span> DRIVE YOUR FUTURE</footer>
+  </main>
+</body>
+</html>
+
+
+
